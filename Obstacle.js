@@ -4,9 +4,9 @@ function Obstacle(canvas, randomY, order) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
 
-  this.width = 35;
+  this.width = 75;
   this.height = randomY;
-  this.x = this.canvas.width - this.width; // Should be 0
+  this.x = this.canvas.width
   this.y = 0;
   // this.url = null;
   this.color = '#57381f';
@@ -28,6 +28,8 @@ Obstacle.prototype.draw = function() {
   }
 };
 
-Obstacle.prototype.move = function() {};
+Obstacle.prototype.move = function() {
+  this.x = this.x - this.speed / 2; 
+};
 
 Obstacle.prototype.setDirection = function() {};

@@ -23,12 +23,21 @@ function main() {
     var gameScreen = buildDom(`
       <section>
         <h1>Soot Escape</h1>
-        <canvas width="600" height="400"></canvas>
+        <canvas width="640" height="480"></canvas>
       </section>
     `);
     var canvas = document.querySelector('canvas');
     var game = new Game(canvas);
     game.startGame();
+
+    document.addEventListener('keydown', function(event) {
+      if (event.keyCode === 32) {
+        game.player.direction = -1;
+      }
+    });
+    document.addEventListener('keyup', function(event) {
+      game.player.direction = 1;
+    });
   }
 
   createGameScreen();
