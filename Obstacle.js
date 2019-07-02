@@ -9,7 +9,7 @@ function Obstacle(canvas, randomY, order) {
   this.x = this.canvas.width - this.width; // Should be 0
   this.y = 0;
   // this.url = null;
-  this.color = 'sienna';
+  this.color = '#57381f';
   this.speed = 3;
   this.order = order;
 }

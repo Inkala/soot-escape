@@ -10,7 +10,7 @@ function Game(canvas) {
 
 Game.prototype.startGame = function() {
   this.player = new Player(this.canvas);
-  var randomY = Math.random() * (this.canvas.height - 75) + 15;
+  var randomY = Math.random() * (this.canvas.height - 90) + 30;
 
   // TODO: Add obstacles at regular intervals
   var topObstacle = new Obstacle(this.canvas, randomY, 1);

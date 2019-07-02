@@ -9,7 +9,7 @@ function Player(canvas) {
   this.x = 30;
   this.y = this.canvas.height / 2 - this.height / 2;
   // this.url = null;
-  this.color = "blue";
+  this.color = "black";
   this.direction = 1;
   this.speed = 3;
   this.lives = 5;
