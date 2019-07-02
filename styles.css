@@ -13,7 +13,6 @@ body {
   padding: 0;
 }
 
-
 /* ---- typography ---- */
 
 body {
@@ -32,7 +31,6 @@ h3 {}
 p {
   margin: 0;
 }
-
 
 
 /* ---- layout ---- */
@@ -57,9 +55,14 @@ p {
   margin: 0 20px;
 }
 
-.section {
+section {
   margin-bottom: 20px;
   padding-top: 20px;
+  border: 1px dashed purple;
+}
+
+canvas {
+  border: 1px dashed darkcyan;
 }
 
 @media (min-width: 768px) {
