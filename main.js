@@ -26,8 +26,12 @@ function main() {
         <canvas width="600" height="400"></canvas>
       </section>
     `);
-    // setTimeout(createGameOverScreen, 3000);
+    var canvas = document.querySelector('canvas');
+    var game = new Game(canvas);
+    game.startGame();
   }
+
+  createGameScreen();
 
   function createGameOverScreen() {
     var gameOverScreen = buildDom(`
@@ -40,7 +44,7 @@ function main() {
     overButton.addEventListener('click', createGameScreen);
   }
 
-  createGameStartScreen();
+  // createGameStartScreen();
 }
 
 window.addEventListener('load', main);
