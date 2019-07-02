@@ -96,8 +96,9 @@ The game will keep score of the player and he will level up, increasing the game
 - Create loop
 - Create player
 - Create obstacles
-- Move player
+- Draw obstacles
 - Move obstacles
+- Move player
 - Check Collisions
 - Check game over condition
 
