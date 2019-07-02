@@ -18,7 +18,7 @@ The game will keep score of the player and he will level up, increasing the game
 
 - buildDom
 - createGameStartScreen
-- createSplashScreen
+- createGameScreen
 - createGameOverScreen
 
 ### Game Constructor
@@ -75,14 +75,14 @@ The game will keep score of the player and he will level up, increasing the game
 - Start the game
 - Goes to smash game when Start button is clicked
 
-### splashScreen
+### gameScreen
 - Game running
 - Lives += 0
 - When lives reach 0, goes to Game Over Screen
 
 ### gameOverScreen
 - Shows Game Over message, score and Retry button
-- Goes back to Splash Screen when Retry button is clicked
+- Goes back to Game Screen when Retry button is clicked
 
 ## Task
 
