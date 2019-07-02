@@ -26,7 +26,7 @@ function main() {
         <canvas width="600" height="400"></canvas>
       </section>
     `);
-    setTimeout(createGameOverScreen, 3000);
+    // setTimeout(createGameOverScreen, 3000);
   }
 
   function createGameOverScreen() {
