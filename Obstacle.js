@@ -4,7 +4,7 @@ function Obstacle(canvas, randomY, order) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
 
-  this.width = 75;
+  this.width = 25;
   this.height = randomY;
   this.x = this.canvas.width
   this.y = 0;

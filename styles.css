@@ -12,7 +12,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  /* background-image: url(images/forest-background.jpg); */
+  height: 100vh;
+  background-image: url(images/forest-background.jpg);
   background-size: cover;
   background-color: #22926A;
   color: white;
@@ -71,7 +72,7 @@ canvas {
   margin: 15px auto;
   background-color: rgba(145, 139, 133, 0.85);
   border: 15px solid;
-  border-color: #422d1c #704F36 #704F36 #422d1c;
+  border-color: #5f5f5f #9e9e9e #9e9e9e #5f5f5f;
 }
 
 @media (min-width: 768px) {

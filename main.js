@@ -36,7 +36,9 @@ function main() {
       }
     });
     document.addEventListener('keyup', function(event) {
-      game.player.direction = 1;
+      if (event.keyCode === 32) {
+        game.player.direction = 1;
+      }
     });
   }
 

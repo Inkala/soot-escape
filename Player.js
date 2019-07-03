@@ -10,9 +10,10 @@ function Player(canvas) {
   this.y = this.canvas.height / 2 - this.height / 2;
   // this.url = null;
   this.color = 'black';
-  this.direction = 1;
+  this.direction = 0;
   this.speed = 3;
   this.lives = 5;
+  // this.playing = false;
 }
 
 Player.prototype.draw = function() {
