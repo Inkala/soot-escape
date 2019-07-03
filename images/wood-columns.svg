@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 250 200" enable-background="new 0 0 250 200" xml:space="preserve">
+<g>
+	<rect x="50" y="0" fill="#59301D" width="25" height="25"/>
+	<rect x="75" y="0" fill="#63391E" width="25" height="200"/>
+	<rect x="100" y="0" fill="#472719" width="25" height="200"/>
+	<rect x="125" y="0" fill="#64381E" width="25" height="50"/>
+	<rect x="200" y="0" fill="#58301E" width="25" height="200"/>
+	<rect x="225" y="0" fill="#48261A" width="25" height="200"/>
+	<rect x="25" y="25" fill="#59301D" width="25" height="25"/>
+	<rect x="50" y="50" fill="#59301D" width="25" height="150"/>
+	<rect x="125" y="50" fill="#5A301B" width="25" height="25"/>
+	<rect x="125" y="75" fill="#64381E" width="25" height="100"/>
+	<path fill="#48261A" d="M50,50h25V25H50V50z M25,50V25h25V0H0v200h50V50H25z"/>
+	<rect x="125" y="175" fill="#5A301B" width="25" height="25"/>
+	<rect x="150" y="0" fill="#472719" width="50" height="200"/>
+</g>
+</svg>
