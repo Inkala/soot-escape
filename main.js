@@ -10,7 +10,7 @@ function main() {
 
   function createGameStartScreen() {
     var gameStartScreen = buildDom(`
-      <section>
+      <section id="start-screen">
         <h1>Soot Escape</h1>
         <button>Start!</button>
       </section>
