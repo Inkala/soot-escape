@@ -18,24 +18,14 @@ Game.prototype.startGame = function() {
   this.player = new Player(this.canvas);
   this.createFirstObstacle();
   var prevHeight = this.initHeight;
-  setInterval(() => {
-    var newHeight = this.createObstacleHeight(prevHeight);
-    var topObstacle = new Obstacle(this.canvas, newHeight, 1);
-    var bottomObstacle = new Obstacle(
-      this.canvas,
-      newHeight + this.obsSpace,
-      2
-    );
-    this.obstacles.push(topObstacle, bottomObstacle);
-    prevHeight = newHeight;
-  }, this.obsFrequency);
+  var intervalId = setInterval(() => this.createObstacles(prevHeight), this.obsFrequency);
   var loop = () => {
     this.player.setBoundaryPosition();
     this.update();
     this.clear();
     this.draw();
-    this.checkColisions();
-    requestAnimationFrame(loop);
+    var animationId = requestAnimationFrame(loop);
+    this.checkColisions(intervalId, animationId, animationId);
   };
   loop();
 };
@@ -80,6 +70,18 @@ Game.prototype.createFirstObstacle = function() {
   this.obstacles.push(firstTopObstacle, firstBottomObstacle);
 };
 
+Game.prototype.createObstacles = function(prevHeight) {
+  var newHeight = this.createObstacleHeight(prevHeight);
+  var topObstacle = new Obstacle(this.canvas, newHeight, 1);
+  var bottomObstacle = new Obstacle(
+    this.canvas,
+    newHeight + this.obsSpace,
+    2
+  );
+  this.obstacles.push(topObstacle, bottomObstacle);
+  prevHeight = newHeight;
+};
+
 Game.prototype.draw = function() {
   this.player.draw();
   this.obstacles.forEach(obstacle => {
@@ -97,7 +99,7 @@ Game.prototype.update = function() {
   });
 };
 
-Game.prototype.checkColisions = function() {
+Game.prototype.checkColisions = function(intervalId, animationId) {
   this.obstacles.forEach(obstacle => {
     var playerRight = this.player.x + this.player.width - 5 > obstacle.x;
     var playerLeft = this.player.x + 5 < obstacle.x + obstacle.width;
@@ -110,6 +112,11 @@ Game.prototype.checkColisions = function() {
     }
     if (playerTop && playerBottom && playerLeft && playerRight) {
       console.log('crash!');
+      this.player.y = 50;
+      clearInterval(intervalId);
+      cancelAnimationFrame(animationId);
+      this.obstacles = [];
+      this.startGame();
     }
   });
 };
