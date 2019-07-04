@@ -23,6 +23,12 @@ function main() {
     var gameScreen = buildDom(`
       <section>
         <h1>Soot Escape</h1>
+        <section class="game-status">
+          <div class="lives">
+          </div>
+          <div class="score">
+          </div>
+        </section>
         <canvas width="640" height="480"></canvas>
       </section>
     `);
@@ -30,7 +36,7 @@ function main() {
     var game = new Game(canvas);
     game.startGame();
     game.gameOverCallback(createGameOverScreen);
-
+    
     document.addEventListener('keydown', function(event) {
       if (event.keyCode === 32) {
         game.player.direction = -1;

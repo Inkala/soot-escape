@@ -7,30 +7,39 @@ function Game(canvas) {
   this.player = null;
   this.obstacles = [];
   this.isGameOver = false;
-  this.obsFrequency = 2000;
+  this.obsFrequency = 1300;
   this.initHeight = 150;
   this.obsSpace = 100;
   this.obsVariant = 150;
   this.obsMinHeight = 30;
   this.lives = 5;
+  this.animationId = null;
+  this.score = 0;
+  this.scoreId = null;
 }
 
 Game.prototype.startGame = function() {
   this.player = new Player(this.canvas);
   this.createFirstObstacle();
   var prevHeight = this.initHeight;
-  var intervalId = setInterval(() => this.createObstacles(prevHeight), this.obsFrequency);
+  var intervalId = setInterval(
+    () => this.createObstacles(prevHeight),
+    this.obsFrequency
+  );
   var loop = () => {
     this.player.setBoundaryPosition();
     this.update();
     this.clear();
     this.draw();
-    if (!this.isGameOver) {
-      var animationId = requestAnimationFrame(loop);
+    var isNextScreen = this.checkColisions(intervalId);
+
+    if (!this.isGameOver && !isNextScreen) {
+      this.animationId = requestAnimationFrame(loop);
+    } else if (isNextScreen) {
+      this.startGame();
     } else {
       this.onGameOver();
     }
-    this.checkColisions(intervalId, animationId, animationId);
   };
   loop();
 };
@@ -78,13 +87,23 @@ Game.prototype.createFirstObstacle = function() {
 Game.prototype.createObstacles = function(prevHeight) {
   var newHeight = this.createObstacleHeight(prevHeight);
   var topObstacle = new Obstacle(this.canvas, newHeight, 1);
-  var bottomObstacle = new Obstacle(
-    this.canvas,
-    newHeight + this.obsSpace,
-    2
-  );
+  var bottomObstacle = new Obstacle(this.canvas, newHeight + this.obsSpace, 2);
   this.obstacles.push(topObstacle, bottomObstacle);
   prevHeight = newHeight;
+};
+
+Game.prototype.updateStatus = function() {
+  var lives = document.querySelector('.lives');
+  lives.innerHTML = `Lives: ${this.lives}`;
+  var score = document.querySelector('.score');
+  score.innerHTML = `Score: ${this.score}`;
+  console.log(this.obstacles[0].x)
+  if (this.obstacles[0].x > 325) {
+    score.innerHTML = `Score: ...`;
+  }
+  if (this.animationId % 5 === 0 && this.obstacles[0].x < 325) {
+    this.score++;
+  }
 };
 
 Game.prototype.draw = function() {
@@ -95,6 +114,7 @@ Game.prototype.draw = function() {
 };
 
 Game.prototype.update = function() {
+  this.updateStatus();
   this.player.move();
   this.obstacles.forEach((obstacle, index) => {
     obstacle.move();
@@ -108,7 +128,8 @@ Game.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 };
 
-Game.prototype.checkColisions = function(intervalId, animationId) {
+Game.prototype.checkColisions = function(intervalId) {
+  var nextScreen = false;
   this.obstacles.forEach(obstacle => {
     var playerRight = this.player.x + this.player.width - 10 > obstacle.x;
     var playerLeft = this.player.x + 10 < obstacle.x + obstacle.width;
@@ -121,19 +142,25 @@ Game.prototype.checkColisions = function(intervalId, animationId) {
     }
     if (playerTop && playerBottom && playerLeft && playerRight) {
       this.lives--;
+      if (this.score > 50) {
+        this.score -= 50;
+      } else {
+        this.score = 0;
+      }
       console.log(`${this.lives} lives`);
       this.player.y = 50;
       clearInterval(intervalId);
-      cancelAnimationFrame(animationId);
+      cancelAnimationFrame(this.animationId);
       this.obstacles = [];
-      this.startGame();
       if (this.lives === 0) {
         this.isGameOver = true;
       }
+      nextScreen = true;
     }
   });
+  return nextScreen;
 };
 
 Game.prototype.gameOverCallback = function(callback) {
   this.onGameOver = callback;
-}
+};
