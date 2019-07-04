@@ -49,6 +49,7 @@ button {
   margin: 50px auto 30px;
   font-size: 1.5rem;
   color: white;
+  text-shadow: 2px 2px 0 #362316;
   padding: 12px 28px;
   background-color: #714f36;
   border: 7px solid #362316;

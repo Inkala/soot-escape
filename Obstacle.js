@@ -20,12 +20,13 @@ Obstacle.prototype.draw = function() {
     this.ctx.fillStyle = this.color1;
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
   } else {
+    this.y = this.height;
     this.ctx.fillStyle = this.color2;
     this.ctx.fillRect(
       this.x,
-      this.height,
+      this.y,
       this.width,
-      this.canvas.height - this.height + 100
+      this.canvas.height - this.height
     );
   }
 };
