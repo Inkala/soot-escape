@@ -12,6 +12,7 @@ function Game(canvas) {
   this.obsSpace = 100;
   this.obsVariant = 150;
   this.obsMinHeight = 30;
+  this.lives = 2;
 }
 
 Game.prototype.startGame = function() {
@@ -24,7 +25,11 @@ Game.prototype.startGame = function() {
     this.update();
     this.clear();
     this.draw();
-    var animationId = requestAnimationFrame(loop);
+    if (!this.isGameOver) {
+      var animationId = requestAnimationFrame(loop);
+    } else {
+      this.onGameOver();
+    }
     this.checkColisions(intervalId, animationId, animationId);
   };
   loop();
@@ -99,6 +104,10 @@ Game.prototype.update = function() {
   });
 };
 
+Game.prototype.clear = function() {
+  this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+};
+
 Game.prototype.checkColisions = function(intervalId, animationId) {
   this.obstacles.forEach(obstacle => {
     var playerRight = this.player.x + this.player.width - 5 > obstacle.x;
@@ -111,16 +120,20 @@ Game.prototype.checkColisions = function(intervalId, animationId) {
       var playerBottom = this.player.y + this.player.height - 5 > obstacle.y;
     }
     if (playerTop && playerBottom && playerLeft && playerRight) {
-      console.log('crash!');
+      this.lives--;
+      console.log(`${this.lives} lives`);
       this.player.y = 50;
       clearInterval(intervalId);
       cancelAnimationFrame(animationId);
       this.obstacles = [];
       this.startGame();
+      if (this.lives === 0) {
+        this.isGameOver = true;
+      }
     }
   });
 };
 
-Game.prototype.clear = function() {
-  this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-};
+Game.prototype.gameOverCallback = function(callback) {
+  this.onGameOver = callback;
+}

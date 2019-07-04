@@ -29,6 +29,7 @@ function main() {
     var canvas = document.querySelector('canvas');
     var game = new Game(canvas);
     game.startGame();
+    game.gameOverCallback(createGameOverScreen);
 
     document.addEventListener('keydown', function(event) {
       if (event.keyCode === 32) {

@@ -12,8 +12,6 @@ function Player(canvas) {
   this.color = 'black';
   this.direction = 0;
   this.speed = 3;
-  this.lives = 5;
-  // this.playing = false;
 }
 
 Player.prototype.draw = function() {
