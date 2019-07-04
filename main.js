@@ -47,7 +47,7 @@ function main() {
 
   function createGameOverScreen() {
     var gameOverScreen = buildDom(`
-      <section>
+      <section id="gamover-screen">
         <h1>GAME OVER</h1>
         <button>Retry?</button>
       </section>

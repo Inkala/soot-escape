@@ -12,7 +12,7 @@ function Game(canvas) {
   this.obsSpace = 100;
   this.obsVariant = 150;
   this.obsMinHeight = 30;
-  this.lives = 2;
+  this.lives = 5;
 }
 
 Game.prototype.startGame = function() {
@@ -110,14 +110,14 @@ Game.prototype.clear = function() {
 
 Game.prototype.checkColisions = function(intervalId, animationId) {
   this.obstacles.forEach(obstacle => {
-    var playerRight = this.player.x + this.player.width - 5 > obstacle.x;
-    var playerLeft = this.player.x + 5 < obstacle.x + obstacle.width;
+    var playerRight = this.player.x + this.player.width - 10 > obstacle.x;
+    var playerLeft = this.player.x + 10 < obstacle.x + obstacle.width;
     if (obstacle.order === 1) {
-      var playerTop = this.player.y + 5 < obstacle.height + obstacle.y;
-      var playerBottom = this.player.y + this.player.height - 5 > obstacle.y;
+      var playerTop = this.player.y + 10 < obstacle.height + obstacle.y;
+      var playerBottom = this.player.y + this.player.height - 10 > obstacle.y;
     } else {
-      var playerTop = this.player.y + 5 < this.canvas.height;
-      var playerBottom = this.player.y + this.player.height - 5 > obstacle.y;
+      var playerTop = this.player.y + 10 < this.canvas.height;
+      var playerBottom = this.player.y + this.player.height - 10 > obstacle.y;
     }
     if (playerTop && playerBottom && playerLeft && playerRight) {
       this.lives--;
