@@ -1,6 +1,6 @@
 'use strict';
 
-function Game(canvas) {
+function Game(canvas, stopMusic, thudSound) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
 
@@ -12,10 +12,12 @@ function Game(canvas) {
   this.obsSpace = 100;
   this.obsVariant = 150;
   this.obsMinHeight = 30;
-  this.lives = 5;
+  this.lives = 3;
   this.animationId = null;
   this.score = 0;
   this.scoreId = null;
+  this.stopMusic = stopMusic;
+  this.thudSound = thudSound;
 }
 
 Game.prototype.startGame = function() {
@@ -97,7 +99,7 @@ Game.prototype.updateStatus = function() {
   lives.innerHTML = `Lives: ${this.lives}`;
   var score = document.querySelector('.score');
   score.innerHTML = `Score: ${this.score}`;
-  console.log(this.obstacles[0].x)
+  console.log(this.obstacles[0].x);
   if (this.obstacles[0].x > 325) {
     score.innerHTML = `Score: ...`;
   }
@@ -141,6 +143,8 @@ Game.prototype.checkColisions = function(intervalId) {
       var playerBottom = this.player.y + this.player.height - 10 > obstacle.y;
     }
     if (playerTop && playerBottom && playerLeft && playerRight) {
+      // this.thudSound.currentTime = 0.5;
+      this.thudSound.play();
       this.lives--;
       if (this.score > 50) {
         this.score -= 50;
@@ -153,6 +157,7 @@ Game.prototype.checkColisions = function(intervalId) {
       cancelAnimationFrame(this.animationId);
       this.obstacles = [];
       if (this.lives === 0) {
+        this.stopMusic();
         this.isGameOver = true;
       }
       nextScreen = true;

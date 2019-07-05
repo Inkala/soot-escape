@@ -10,7 +10,7 @@ function Obstacle(canvas, height, order) {
   this.y = 0;
   this.color1 = '#57381f';
   this.color2 = '#362314';
-  this.speed = 2;
+  this.speed = 3;
   this.order = order;
   this.img = 'images/wood-columns.svg';
 }
