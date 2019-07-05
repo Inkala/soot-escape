@@ -7,10 +7,11 @@ function Game(canvas, stopMusic, thudSound) {
   this.player = null;
   this.obstacles = [];
   this.isGameOver = false;
-  this.obsFrequency = 1200;
+  this.obsFrequency = 1000;
   this.initHeight = 150;
   this.obsSpace = 100;
-  this.obsVariant = 150;
+  this.obsVariation = 175;
+  this.minVariation = 50
   this.obsMinHeight = 30;
   this.lives = 3;
   this.animationId = null;
@@ -48,14 +49,14 @@ Game.prototype.startGame = function() {
 };
 
 Game.prototype.createObstacleHeight = function(prevHeight) {
-  var randomVariation = Math.random() * this.obsVariant;
+  var randomVariation = (Math.random() * this.obsVariation) + this.minVariation;
   var direction = 0;
-  if (prevHeight > this.canvas.height / 2) {
-    direction = -1;
-  } else {
+  if (prevHeight < (this.canvas.height - this.obsSpace) / 2) {
     direction = 1;
+  } else {
+    direction = -1;
   }
-  return prevHeight + randomVariation * direction;
+  return prevHeight + (randomVariation * direction) - 30;
 };
 
 Game.prototype.createFirstObstacle = function() {
