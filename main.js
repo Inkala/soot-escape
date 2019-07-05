@@ -8,6 +8,13 @@ function main() {
     return mainElement;
   }
 
+  function startOnPress(event) {
+    if (event.keyCode === 13) {
+      createGameScreen();
+      document.removeEventListener('keyup', startOnPress)
+    }
+  }
+
   function createGameStartScreen() {
     var gameStartScreen = buildDom(`
       <section id="start-screen">
@@ -15,28 +22,29 @@ function main() {
         <button>Start!</button>
       </section>
     `);
+    document.addEventListener('keyup', startOnPress);
     var startButton = gameStartScreen.querySelector('button');
     startButton.addEventListener('click', createGameScreen);
   }
 
   function createGameScreen() {
     var gameScreen = buildDom(`
-    <section>
-      <h1>Soot Escape</h1>
-      <section class="game-status">
-        <div class="lives">
-        </div>
-        <div class="score">
-        </div>
+      <section>
+        <h1>Soot Escape</h1>
+        <section class="game-status">
+          <div class="lives">
+          </div>
+          <div class="score">
+          </div>
+        </section>
+        <canvas width="640" height="480"></canvas>
       </section>
-      <canvas width="640" height="480"></canvas>
-    </section>
     `);
     var canvas = document.querySelector('canvas');
     var gameSong = new Audio('sounds/totoro-8bit.mp3');
-    gameSong.currentTime = 1.5;
+    gameSong.currentTime = 1.7;
     gameSong.play();
-    var thudSound = new Audio('sounds/thud3.wav');
+    var thudSound = new Audio('sounds/thud.wav');
     var game = new Game(canvas, stopMusic, thudSound);
     game.startGame();
     game.gameOverCallback(createGameOverScreen);
@@ -58,19 +66,23 @@ function main() {
 
   // createGameScreen();
 
-  function createGameOverScreen() {
+  function createGameOverScreen(score) {
     var gameOverSong = new Audio('sounds/game-over.wav');
-    gameOverSong.play()
+    gameOverSong.play();
     var gameOverScreen = buildDom(`
       <section id="gamover-screen">
         <h1>GAME OVER</h1>
+        <p class="report"></p>
         <button>Retry?</button>
-        </section>
-        `);
+      </section>
+    `);
+    var report = document.querySelector('.report');
+    report.innerHTML = `Your socore was <span>${score}</span>`;
     var overButton = gameOverScreen.querySelector('button');
+    document.addEventListener('keyup', startOnPress);
     overButton.addEventListener('click', createGameScreen);
   }
-  
+
   createGameStartScreen();
 }
 

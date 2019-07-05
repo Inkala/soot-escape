@@ -7,7 +7,7 @@ function Game(canvas, stopMusic, thudSound) {
   this.player = null;
   this.obstacles = [];
   this.isGameOver = false;
-  this.obsFrequency = 1300;
+  this.obsFrequency = 1200;
   this.initHeight = 150;
   this.obsSpace = 100;
   this.obsVariant = 150;
@@ -40,7 +40,7 @@ Game.prototype.startGame = function() {
     } else if (isNextScreen) {
       this.startGame();
     } else {
-      this.onGameOver();
+      this.onGameOver(this.score);
     }
   };
   loop();
@@ -56,25 +56,6 @@ Game.prototype.createObstacleHeight = function(prevHeight) {
   }
   return prevHeight + randomVariation * direction;
 };
-
-// Game.prototype.createObstacleHeight = function(prevHeight) {
-//   var randomVariation = Math.random() * this.obsVariant;
-//   var direction = 0;
-//   var maxHeight = this.canvas.height - this.obsMinHeight - this.obsSpace;
-//   console.log('prevHeight', prevHeight)
-//   console.log('randomVariation', randomVariation)
-//   console.log('this.obsMinHeight', this.obsMinHeight)
-//   console.log('Resta', prevHeight - randomVariation)
-//   var newHeight = prevHeight + randomVariation;
-//   if (newHeight > maxHeight || newHeight < 0) {
-//     direction = -1;
-//   } else if (newHeight < this.obsMinHeight) {
-//     direction = 1;
-//   } else {
-//     direction = Math.floor(Math.random() * 2) * 2 - 1;
-//   }
-//   return prevHeight + randomVariation * direction;
-// };
 
 Game.prototype.createFirstObstacle = function() {
   var firstTopObstacle = new Obstacle(this.canvas, this.initHeight, 1);
@@ -99,7 +80,6 @@ Game.prototype.updateStatus = function() {
   lives.innerHTML = `Lives: ${this.lives}`;
   var score = document.querySelector('.score');
   score.innerHTML = `Score: ${this.score}`;
-  console.log(this.obstacles[0].x);
   if (this.obstacles[0].x > 325) {
     score.innerHTML = `Score: ...`;
   }
@@ -146,12 +126,6 @@ Game.prototype.checkColisions = function(intervalId) {
       // this.thudSound.currentTime = 0.5;
       this.thudSound.play();
       this.lives--;
-      if (this.score > 50) {
-        this.score -= 50;
-      } else {
-        this.score = 0;
-      }
-      console.log(`${this.lives} lives`);
       this.player.y = 50;
       clearInterval(intervalId);
       cancelAnimationFrame(this.animationId);

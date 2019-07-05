@@ -45,7 +45,7 @@ section {
 }
 
 button {
-  margin: 50px auto 30px;
+  margin: 30px auto;
   font-size: 1.5rem;
   color: white;
   text-shadow: 2px 2px 0 #362316;
@@ -81,6 +81,19 @@ canvas {
   transform: scale(1, 1.1);
   text-shadow: 2px 2px 0 #694f07;
   font-size: 0.9em;
+}
+
+.report {
+  display: flex;
+  text-shadow: 2px 2px 0 white;
+  color: #362316;
+  font-size: 1.2em;
+  transform: scale(1, 1.2);
+}
+
+.report span {
+  font-size: 1.3em;
+  padding-left: 15px;
 }
 
 /* @media (min-width: 768px) {
