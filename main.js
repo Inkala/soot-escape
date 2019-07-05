@@ -77,7 +77,7 @@ function main() {
       </section>
     `);
     var report = document.querySelector('.report');
-    report.innerHTML = `Your socore was <span>${score}</span>`;
+    report.innerHTML = `Your score was <span>${score}</span>`;
     var overButton = gameOverScreen.querySelector('button');
     document.addEventListener('keyup', startOnPress);
     overButton.addEventListener('click', createGameScreen);

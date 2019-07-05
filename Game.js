@@ -33,6 +33,7 @@ Game.prototype.startGame = function() {
     this.update();
     this.clear();
     this.draw();
+    this.checkEnemiesInScreen();
     var isNextScreen = this.checkColisions(intervalId);
 
     if (!this.isGameOver && !isNextScreen) {
@@ -100,9 +101,6 @@ Game.prototype.update = function() {
   this.player.move();
   this.obstacles.forEach((obstacle, index) => {
     obstacle.move();
-    if (obstacle.x < -35) {
-      this.obstacles.splice(index, 1);
-    }
   });
 };
 
@@ -139,6 +137,14 @@ Game.prototype.checkColisions = function(intervalId) {
   });
   return nextScreen;
 };
+
+Game.prototype.checkEnemiesInScreen = function() {
+  this.obstacles.forEach((obstacle, index) => {
+    if (obstacle.x < -35) {
+      this.obstacles.splice(index, 1);
+    }
+  });
+}
 
 Game.prototype.gameOverCallback = function(callback) {
   this.onGameOver = callback;
