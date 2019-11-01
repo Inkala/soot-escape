@@ -11,7 +11,7 @@ function Game(canvas, stopMusic, thudSound) {
   this.initHeight = 150;
   this.obsSpace = 100;
   this.obsVariation = 175;
-  this.minVariation = 50
+  this.minVariation = 50;
   this.obsMinHeight = 30;
   this.lives = 3;
   this.animationId = null;
@@ -145,7 +145,7 @@ Game.prototype.checkEnemiesInScreen = function() {
       this.obstacles.splice(index, 1);
     }
   });
-}
+};
 
 Game.prototype.gameOverCallback = function(callback) {
   this.onGameOver = callback;
